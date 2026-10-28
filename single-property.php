@@ -66,7 +66,7 @@ while (have_posts()) : the_post();
 			<?php endif; ?>
 		</article>
 
-		<?php get_template_part('template-parts/contact-box', null, ['title' => 'Quan tâm bất động sản này?', 'text' => 'Gửi thông tin để được tư vấn và đặt lịch xem nhà.', 'ref' => $id, 'source' => get_the_title(), 'phone' => $phone, 'price' => nvr_price_text($id), 'price_numeric' => nvr_meta('deal_type', $id) === 'rent' ? 0 : $price_num]); ?>
+		<?php get_template_part('template-parts/contact-box', null, ['title' => 'Quan tâm bất động sản này?', 'text' => 'Gửi thông tin để được tư vấn và đặt lịch xem nhà.', 'ref' => $id, 'source' => get_the_title(), 'name' => get_the_title(), 'phone' => $phone, 'price' => nvr_price_text($id), 'price_numeric' => nvr_meta('deal_type', $id) === 'rent' ? 0 : $price_num]); ?>
 	</div>
 
 	<?php

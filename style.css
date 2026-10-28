@@ -552,3 +552,288 @@ textarea{resize:vertical;min-height:90px}
 @media (max-width:1024px){.about-team{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:900px){.calc-layout{grid-template-columns:1fr}.calc-form{position:static}.about-cards.two{grid-template-columns:1fr}}
 @media (max-width:560px){.about-team{grid-template-columns:1fr}.about-timeline li{grid-template-columns:64px 1fr;gap:14px}.about-timeline li:not(:last-child)::before{left:52px}.about-timeline li::after{left:47px}.about-year{font-size:17px}.calc-two{grid-template-columns:1fr}.calc-grid{grid-template-columns:1fr}}
+
+/* =====================================================================
+   v5.5 – UI refinements
+   ===================================================================== */
+
+/* Search bar: not stretched edge to edge */
+.hero-inner .search-panel{max-width:1100px}
+.hero-inner .search-panel .btn{min-height:50px}
+
+/* Custom dropdown arrows: balanced spacing from the border, everywhere */
+select{
+	-webkit-appearance:none;appearance:none;cursor:pointer;
+	padding-right:44px;text-overflow:ellipsis;
+	background-color:#fff;
+	background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23126b50' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+	background-repeat:no-repeat;background-position:right 16px center;background-size:16px;
+}
+select::-ms-expand{display:none}
+
+/* Project card: no button, whole card clickable */
+.project-card{position:relative;transition:transform .2s,box-shadow .2s}
+.project-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+.project-content h3 a::after{content:"";position:absolute;inset:0;z-index:1}
+.project-content .location{margin-bottom:10px}
+.project-content .property-meta{margin:0;padding:10px 0 0;border-bottom:0}
+
+/* Detail card (property sidebar) */
+.detail-eyebrow{font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.detail-name{font-size:21px;line-height:1.3;margin:0 0 10px}
+.detail-card .detail-name+.price{padding-bottom:16px;margin-bottom:16px;border-bottom:1px dashed var(--line)}
+
+/* ---------- Forms ---------- */
+.contact-form{gap:12px}
+.contact-form .field{position:relative}
+.contact-form .field-ico{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--green);opacity:.85;pointer-events:none;display:grid;place-items:center;z-index:1}
+.contact-form .field-area .field-ico{top:17px;transform:none}
+.contact-form input,.contact-form select,.contact-form textarea{
+	background-color:#f5f8f6;border:1.5px solid transparent;border-radius:12px;
+	padding:14px 16px 14px 46px;font-size:15px;transition:background-color .2s,border-color .2s,box-shadow .2s}
+.contact-form select{background-position:right 16px center}
+.contact-form textarea{min-height:110px;resize:vertical;line-height:1.5}
+.contact-form input::placeholder,.contact-form textarea::placeholder{color:#8a958e}
+.contact-form input:hover,.contact-form select:hover,.contact-form textarea:hover{border-color:#cfdcd4}
+.contact-form input:focus,.contact-form select:focus,.contact-form textarea:focus{outline:0;background-color:#fff;border-color:var(--green);box-shadow:0 0 0 4px rgba(18,107,80,.14)}
+.contact-form .btn-submit{margin-top:4px;padding:15px 20px;border-radius:12px;font-size:16px;background:linear-gradient(135deg,#17805f,#0b513d);border-color:transparent;box-shadow:0 10px 22px rgba(18,107,80,.28)}
+.contact-form .btn-submit:hover{transform:translateY(-1px);box-shadow:0 14px 28px rgba(18,107,80,.34)}
+.contact-form .btn-submit .nvr-icon{transition:transform .2s}
+.contact-form .btn-submit:hover .nvr-icon{transform:translateX(3px)}
+.form-note{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:6px;margin:2px 0 0;font-size:12.5px;color:var(--muted)}
+.form-note .nvr-icon{color:var(--green)}
+
+/* Contact / sidebar cards */
+.detail-card{border-radius:20px;padding:26px;border:1px solid #e1e9e4;box-shadow:0 18px 44px rgba(24,37,31,.09)}
+.contact-layout .detail-card{border-top:5px solid var(--green)}
+.contact-layout .detail-card .card-title{font-size:22px;margin-bottom:6px}
+.contact-layout .detail-card>p{color:var(--muted);margin-bottom:18px}
+.contact-card{border-radius:16px;padding:20px;transition:transform .2s,box-shadow .2s,border-color .2s}
+.contact-card:hover{transform:translateY(-2px)}
+.contact-card .nvr-icon{width:44px;height:44px;padding:11px;border-radius:12px;background:var(--green-soft);box-sizing:border-box}
+
+/* CTA band (home + about) */
+.cta-band{position:relative;overflow:hidden;border-radius:28px;padding:52px;gap:48px;
+	background:radial-gradient(circle at 12% 0,#1c8a68 0,transparent 45%),linear-gradient(135deg,#126b50,#0a4635)}
+.cta-band::before,.cta-band::after{content:"";position:absolute;border-radius:50%;pointer-events:none;background:rgba(255,255,255,.06)}
+.cta-band::before{width:360px;height:360px;right:-120px;top:-150px}
+.cta-band::after{width:240px;height:240px;left:-80px;bottom:-110px}
+.cta-band>*{position:relative;z-index:1}
+.cta-copy .eyebrow{display:inline-block;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.14);color:#d7f1e5;margin-bottom:14px}
+.cta-band h2{font-size:clamp(26px,3vw,38px);line-height:1.2;margin-bottom:12px}
+.cta-points{display:grid;gap:10px;margin:20px 0 24px}
+.cta-points li{display:flex;align-items:center;gap:10px;color:#e8f5ee;font-size:15px}
+.cta-points .nvr-icon{width:24px;height:24px;padding:5px;border-radius:50%;background:rgba(255,255,255,.18);box-sizing:border-box}
+.cta-contact{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;background:rgba(255,255,255,.12);margin:0}
+.cta-band .contact-form{grid-template-columns:1fr 1fr;background:#fff;padding:26px;border-radius:20px;box-shadow:0 24px 60px rgba(0,0,0,.25);color:var(--ink)}
+.cta-band .contact-form .btn.btn-submit{background:linear-gradient(135deg,#17805f,#0b513d);color:#fff;border-color:transparent}
+.cta-band .contact-form .btn.btn-submit:hover{background:linear-gradient(135deg,#1a8f6b,#0e5c46)}
+.cta-band .contact-form .field-wide,.cta-band .contact-form .btn,.cta-band .contact-form .form-note{grid-column:1/-1}
+.cta-band .notice{background:#fff}
+
+/* ---------- Services section ---------- */
+.services-section{background:linear-gradient(180deg,#fff,#f4f8f5)}
+.services-head{text-align:center;max-width:720px;margin:0 auto 46px}
+.services-eyebrow{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:14px;color:var(--green);font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase}
+.services-eyebrow::before,.services-eyebrow::after{content:"";width:34px;height:2px;background:var(--green);opacity:.5}
+.services-head h2{font-size:clamp(28px,3.6vw,42px);line-height:1.2;margin:0 0 12px}
+.services-head p{color:var(--muted);font-size:17px;margin:0}
+.services-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px;max-width:1080px;margin:0 auto}
+.service-card{position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;text-align:center;background:#fff;border:1px solid #e1e9e4;border-radius:28px;padding:54px 40px 40px;box-shadow:0 18px 44px rgba(24,37,31,.07);transition:transform .25s,box-shadow .25s,border-color .25s}
+.service-card::before{content:"";position:absolute;left:0;right:0;top:0;height:5px;background:linear-gradient(90deg,#17805f,#7fcfae)}
+.service-card:hover{transform:translateY(-6px);box-shadow:0 28px 60px rgba(18,107,80,.16);border-color:#b9dccb}
+.service-no{position:absolute;right:26px;top:20px;font-size:76px;font-weight:900;line-height:1;color:#126b50;opacity:.07;letter-spacing:-3px}
+.service-ico{display:grid;place-items:center;width:84px;height:84px;margin-bottom:22px;border-radius:24px;background:var(--green-soft);color:var(--green);box-shadow:0 0 0 10px rgba(18,107,80,.06)}
+.service-card.is-featured .service-ico{background:var(--green);color:#fff}
+.service-card h3{font-size:26px;margin:0 0 12px}
+.service-card>p{color:var(--muted);line-height:1.7;max-width:420px;margin:0 0 24px}
+.service-list{display:grid;gap:10px;text-align:left;margin:0 0 30px;padding:20px 0 0;border-top:1px solid var(--line);width:100%;max-width:320px}
+.service-list li{display:flex;align-items:center;gap:10px;font-size:15px;color:#33433a}
+.service-list .nvr-icon{color:var(--green)}
+.service-btn{margin-top:auto;min-width:210px;padding:14px 26px;border-radius:999px;font-size:15px;background:#fff;color:var(--green);border:1.5px solid var(--green)}
+.service-btn:hover,.service-card:hover .service-btn{background:var(--green);color:#fff;border-color:var(--green)}
+.service-card.is-featured .service-btn{background:var(--green);color:#fff;box-shadow:0 10px 22px rgba(18,107,80,.28)}
+.service-card.is-featured .service-btn:hover{background:var(--green-dark)}
+@media (max-width:760px){
+	.services-grid{grid-template-columns:1fr;gap:20px}
+	.service-card{padding:44px 24px 30px}
+	.cta-band{padding:30px 20px}
+	.cta-band .contact-form{padding:20px;grid-template-columns:1fr}
+}
+
+/* =====================================================================
+   Homepage: category tabs (Dự án / Bất động sản nổi bật)
+   ===================================================================== */
+.cat-tabs-scroll{overflow-x:auto;scrollbar-width:none;margin:0 0 24px;border-bottom:1px solid var(--line)}
+.cat-tabs-scroll::-webkit-scrollbar{display:none}
+.cat-tabs{display:flex;gap:6px;min-width:max-content}
+.cat-tab{position:relative;background:none;border:0;padding:12px 16px;font-size:15px;font-weight:600;color:var(--muted);white-space:nowrap;transition:color .2s}
+.cat-tab::after{content:"";position:absolute;left:12px;right:12px;bottom:-1px;height:2px;background:var(--green);transform:scaleX(0);transition:transform .2s}
+.cat-tab:hover{color:var(--ink)}
+.cat-tab.is-active{color:var(--green)}
+.cat-tab.is-active::after{transform:scaleX(1)}
+.cat-more{display:flex;justify-content:center;margin-top:28px}
+.cat-more-link{display:inline-flex;align-items:center;gap:8px;padding:12px 26px;border:1px solid var(--green);border-radius:999px;color:var(--green);font-weight:700;background:#fff;transition:background .2s,color .2s}
+.cat-more-link:hover{background:var(--green);color:#fff}
+.filter-note{margin:0 0 20px;padding:12px 16px;background:var(--green-soft);border-radius:10px;display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center}
+.blog-more{margin-top:16px}
+
+/* =====================================================================
+   Homepage: "Về NhàViệt" - danh sách + ảnh đổi theo hover
+   ===================================================================== */
+.about-block{background:#f7f7f5;color:#1a1a1a;padding:96px 0}
+.about-block-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;gap:80px;align-items:center}
+.about-block-copy{flex:0 1 460px;min-width:0}
+.ab-eyebrow{display:flex;align-items:center;gap:12px;text-transform:uppercase;letter-spacing:3px;font-size:.78rem;font-weight:500;color:#0f5132;margin-bottom:22px}
+.ab-eyebrow::before{content:"";width:24px;height:1px;background:#0f5132}
+.about-block h2{font-family:"Playfair Display",Georgia,serif;font-weight:600;font-size:2.6rem;line-height:1.18;letter-spacing:-.5px;margin:0 0 36px;color:#1a1a1a}
+.ab-list{list-style:none;margin:0;padding:0}
+.ab-list li{border-top:1px solid #e3e0d8}
+.ab-list li:last-child{border-bottom:1px solid #e3e0d8}
+.ab-item{display:flex;gap:22px;align-items:flex-start;padding:18px 0;cursor:pointer;color:inherit;text-decoration:none}
+.ab-num{font-family:"Playfair Display",Georgia,serif;font-size:1.5rem;line-height:1.3;color:#bbb;min-width:34px;transition:color .45s ease}
+.ab-text{flex:1;min-width:0}
+.ab-text h3{font-family:Inter,sans-serif;font-size:1.15rem;font-weight:500;margin:0;line-height:1.5;color:#1a1a1a;transition:color .45s ease}
+.ab-text p{font-size:.95rem;line-height:1.6;color:#6b6b6b;margin:0;max-height:0;overflow:hidden;opacity:0;transition:max-height .6s ease,opacity .6s ease,margin .6s ease}
+.ab-item.active .ab-num,.ab-item.active h3{color:#0f5132}
+.ab-item.active p{max-height:80px;opacity:1;margin-top:6px}
+.ab-item:focus-visible{outline:2px solid #0f5132;outline-offset:2px}
+.ab-frame{position:relative;flex:1 1 0;min-width:0;max-width:520px;margin-left:auto;aspect-ratio:4/5;border-radius:4px;overflow:hidden;background:#e3e0d8}
+.ab-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.04);transition:opacity .6s ease,transform .6s ease}
+.ab-img.show{opacity:1;transform:scale(1)}
+@media (max-width:900px){
+	.about-block{padding:64px 0}
+	.about-block-inner{flex-direction:column;gap:40px;align-items:stretch}
+	.about-block h2{font-size:2rem}
+	.about-block-copy{flex:none}
+	.ab-frame{width:100%;max-width:none;margin:0}
+}
+@media (prefers-reduced-motion:reduce){.ab-img,.ab-text p,.ab-num,.ab-text h3{transition:none}}
+
+/* =====================================================================
+   v5.7 - Form tư vấn mở rộng + nút Đặt lịch + popup
+   ===================================================================== */
+.contact-form.is-extended{grid-template-columns:1fr 1fr}
+.contact-form .chip-group{grid-column:1/-1;border:0;margin:2px 0 0;padding:0;min-width:0}
+.contact-form .chip-group legend{padding:0;margin:0 0 8px;font-size:13px;font-weight:700;color:var(--ink)}
+.chip-row{display:flex;flex-wrap:wrap;gap:8px}
+.chip-opt{position:relative;display:inline-block}
+.contact-form .chip-opt input{position:absolute;inset:0;width:100%;height:100%;margin:0;padding:0;opacity:0;cursor:pointer;z-index:2}
+.chip-opt span{display:inline-flex;align-items:center;padding:9px 16px;border-radius:999px;background:#f5f8f6;border:1.5px solid #e1e9e4;font-size:14px;font-weight:600;color:#3c4a42;transition:background .15s,border-color .15s,color .15s}
+.chip-opt:hover span{border-color:#b9cfc3}
+.contact-form .chip-opt input:checked+span{background:var(--green);border-color:var(--green);color:#fff}
+.contact-form .chip-opt input:focus-visible+span{outline:2px solid var(--green);outline-offset:2px}
+.contact-form select{-webkit-appearance:none;appearance:none;cursor:pointer;padding-right:40px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23667068' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 15px center}
+.contact-form textarea{resize:none;min-height:96px}
+.contact-form input[type=date]{min-height:50px}
+.cta-band .contact-form .form-note{color:var(--muted)}
+.cta-band .contact-form{gap:14px 12px}
+.cta-band .contact-form .chip-group,.cta-band .contact-form .form-note{grid-column:1/-1}
+
+/* Floating "Đặt lịch" button */
+.fc-book{border:0;cursor:pointer;background:linear-gradient(135deg,#17805f,#0b513d);font:inherit}
+.fc-book .fc-label{font-family:inherit}
+
+/* Modal */
+.nvr-modal{position:fixed;inset:0;z-index:300;display:grid;place-items:center;padding:20px}
+.nvr-modal[hidden]{display:none}
+.nvr-modal-backdrop{position:absolute;inset:0;background:rgba(10,30,22,.55);backdrop-filter:blur(3px);animation:nvrFade .2s ease}
+.nvr-modal-panel{position:relative;width:min(560px,100%);max-height:calc(100vh - 40px);overflow:auto;background:#fff;border-radius:24px;box-shadow:0 30px 80px rgba(0,0,0,.35);animation:nvrPop .25s cubic-bezier(.2,.8,.3,1)}
+.nvr-modal-head{padding:30px 32px 22px;color:#fff;background:radial-gradient(circle at 10% 0,#1c8a68 0,transparent 55%),linear-gradient(135deg,#126b50,#0a4635)}
+.nvr-modal-badge{display:grid;place-items:center;width:46px;height:46px;border-radius:14px;background:rgba(255,255,255,.16);margin-bottom:14px}
+.nvr-modal-head h2{margin:0 0 6px;font-size:24px;line-height:1.25}
+.nvr-modal-head p{margin:0;color:#d5e7df;font-size:14.5px}
+.nvr-modal-body{padding:24px 32px 28px}
+.nvr-modal-close{position:absolute;right:14px;top:14px;z-index:3;width:38px;height:38px;border-radius:50%;border:0;background:rgba(255,255,255,.18);color:#fff;display:grid;place-items:center;cursor:pointer;transition:background .2s}
+.nvr-modal-close:hover{background:rgba(255,255,255,.3)}
+body.nvr-modal-open{overflow:hidden}
+@keyframes nvrFade{from{opacity:0}to{opacity:1}}
+@keyframes nvrPop{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
+
+@media (max-width:760px){
+	.contact-form.is-extended{grid-template-columns:1fr}
+	.nvr-modal{align-items:end;padding:0}
+	.nvr-modal-panel{width:100%;max-height:92vh;border-radius:24px 24px 0 0}
+	.nvr-modal-head{padding:24px 20px 18px}
+	.nvr-modal-body{padding:18px 20px calc(22px + env(safe-area-inset-bottom))}
+}
+@media (max-width:768px){
+	.fc-label{font-size:13px}
+	.fc{gap:6px}
+}
+@media (prefers-reduced-motion:reduce){.nvr-modal-backdrop,.nvr-modal-panel{animation:none}}
+
+/* =====================================================================
+   Trang Liên hệ (v5.8) - Glassmorphism + Layered layout
+   ===================================================================== */
+.lh-stage{position:relative;overflow:hidden;padding:56px 0 72px;background:#0c1f18;isolation:isolate;font-family:Inter,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+.lh-bg{position:absolute;left:0;right:0;top:-12%;height:124%;background-size:cover;background-position:center;filter:brightness(.35);will-change:transform;z-index:-2}
+.lh-shade{position:absolute;inset:0;background:radial-gradient(circle at 15% 10%,rgba(230,194,122,.14),transparent 45%),linear-gradient(180deg,rgba(8,26,19,.25),rgba(8,26,19,.55));z-index:-1}
+.lh-wrap{width:min(1240px,calc(100% - 48px));margin-inline:auto;display:grid;gap:28px}
+.lh-glass{background:rgba(255,255,255,.75);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.55);border-radius:28px;box-shadow:0 30px 80px rgba(0,0,0,.35)}
+.lh-top{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;padding:48px}
+.lh-info .breadcrumbs{font-size:13px;margin-bottom:18px}
+
+.lh-title{font-family:"Playfair Display",Georgia,serif;font-weight:800;font-size:clamp(40px,5.2vw,72px);line-height:1.02;letter-spacing:-1.5px;margin:0 0 18px;color:#0f5132}
+.lh-title span{display:block;font-weight:400;font-style:italic;color:#18251f;padding-left:.9em}
+.lh-lead{font-weight:300;font-size:17px;line-height:1.7;color:#33433a;max-width:520px;margin:0 0 30px}
+
+.lh-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.lh-card{display:flex;flex-direction:column;gap:3px;padding:20px;border-radius:18px;background:#fff;color:var(--ink);border:1px solid rgba(15,81,50,.08);box-shadow:0 12px 30px rgba(10,40,28,.12);transition:transform .25s cubic-bezier(.2,.8,.3,1),box-shadow .25s;will-change:transform}
+.lh-card:hover{box-shadow:0 20px 44px rgba(10,40,28,.22)}
+.lh-card strong{font-size:16px;font-weight:600}
+.lh-sub{font-size:13.5px;color:var(--muted);font-weight:400;overflow-wrap:anywhere}
+.lh-ico{display:grid;place-items:center;width:48px;height:48px;border-radius:14px;margin-bottom:12px;background:var(--green-soft);color:#0f5132;transition:transform .3s,background .3s,color .3s}
+.lh-card:hover .lh-ico{transform:rotate(-5deg);background:#0f5132;color:#e6c27a}
+
+.lh-formbox{align-self:center}
+.lh-formbox h2{font-family:"Playfair Display",Georgia,serif;font-size:clamp(26px,2.6vw,34px);margin:0 0 6px;color:#0f5132}
+.lh-formbox>p{margin:0 0 24px;color:#4a5a51;font-weight:300}
+.lh-form{display:grid;gap:22px}
+.lh-field{position:relative;padding-top:18px}
+.lh-field::before{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:rgba(15,81,50,.28)}
+.lh-field::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:linear-gradient(90deg,#0f5132,#e6c27a);transform:scaleX(0);transform-origin:left;transition:transform .45s cubic-bezier(.2,.8,.3,1)}
+.lh-field:focus-within::after{transform:scaleX(1)}
+.lh-form .lh-field input,.lh-form .lh-field textarea{width:100%;border:0;border-radius:0;background:transparent;padding:8px 0 10px;font:400 16px/1.5 Inter,sans-serif;color:var(--ink);outline:0;box-shadow:none;resize:none}
+.lh-field label{position:absolute;left:0;top:26px;font-size:15.5px;font-weight:300;color:#5b6a61;pointer-events:none;transform-origin:left top;transition:transform .25s,color .25s}
+.lh-field input:focus+label,.lh-field input:not(:placeholder-shown)+label,.lh-field textarea:focus+label,.lh-field textarea:not(:placeholder-shown)+label{transform:translateY(-24px) scale(.8);color:#0f5132;font-weight:500}
+.lh-field textarea{min-height:78px}
+
+.lh-submit{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:10px;justify-self:stretch;padding:17px 30px;border:0;border-radius:999px;background:linear-gradient(135deg,#17805f,#0f5132);color:#fff;font:600 16px Inter,sans-serif;cursor:pointer;box-shadow:0 10px 24px rgba(15,81,50,.32);transition:transform .25s,box-shadow .25s}
+.lh-submit::after{content:"";position:absolute;top:0;left:-70%;width:45%;height:100%;background:linear-gradient(105deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg)}
+.lh-submit:hover,.lh-submit:focus-visible{transform:translateY(-3px);box-shadow:0 18px 36px rgba(15,81,50,.45)}
+.lh-submit:hover::after,.lh-submit:focus-visible::after{left:130%;transition:left .8s ease}
+.lh-submit .nvr-icon{transition:transform .25s}
+.lh-submit:hover .nvr-icon{transform:translateX(6px)}
+.lh-note{display:flex;align-items:center;justify-content:center;gap:6px;margin:0;font-size:12.5px;color:#4a5a51}
+.lh-note .nvr-icon{color:#0f5132}
+.lh-formbox .notice{margin-bottom:16px}
+
+.lh-mapbox{padding:28px}
+.lh-maphead{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:18px;padding:0 6px}
+.lh-addr h2{font-family:"Playfair Display",Georgia,serif;font-size:28px;margin:0 0 8px;color:#0f5132}
+.lh-addr p{display:flex;align-items:flex-start;gap:8px;margin:2px 0;color:#33433a;font-size:14.5px}
+.lh-addr .nvr-icon{color:#0f5132;margin-top:3px;flex-shrink:0}
+.lh-mapbtns{display:flex;gap:10px;flex-wrap:wrap}
+.lh-pill{display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;border:1.5px solid #0f5132;color:#0f5132;font-weight:600;font-size:14.5px;background:rgba(255,255,255,.6);transition:background .2s,color .2s,transform .2s}
+.lh-pill:hover{background:#0f5132;color:#fff;transform:translateY(-2px)}
+.lh-pill-solid{background:#0f5132;color:#fff}
+.lh-pill-solid:hover{background:#0b3d27;border-color:#0b3d27}
+.lh-map{height:450px;border-radius:20px;overflow:hidden;background:#dfe6e1}
+.lh-map iframe{display:block;width:100%;height:100%;border:0;filter:grayscale(1) brightness(.95);transition:filter .8s ease}
+.lh-map:hover iframe,.lh-map:focus-within iframe{filter:grayscale(0) brightness(1.08)}
+
+@media (max-width:1023px){
+	.lh-stage{padding:32px 0 48px}
+	.lh-wrap{width:min(100% - 28px,720px)}
+	.lh-top{grid-template-columns:1fr;gap:36px;padding:32px 24px}
+	.lh-map{height:320px}
+	.lh-mapbox{padding:18px}
+}
+@media (max-width:520px){
+	.lh-cards{grid-template-columns:1fr}
+	.lh-title span{padding-left:.5em}
+	.lh-map{height:280px}
+}
+@media (hover:none){.lh-map iframe{filter:grayscale(.2)}}
+@media (prefers-reduced-motion:reduce){.lh-bg{transform:none!important}.lh-card,.lh-submit,.lh-field::after{transition:none}.lh-submit:hover::after{transition:none}}

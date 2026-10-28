@@ -6,6 +6,7 @@ $phone = !empty($args['phone']) ? $args['phone'] : nvr_hotline();
 $tel = 'tel:' . preg_replace('/[^0-9+]/', '', $phone);
 ?>
 <aside class="detail-card">
+	<?php if (!empty($args['name'])) : ?><div class="detail-eyebrow">Bất động sản</div><h2 class="detail-name"><?php echo esc_html($args['name']); ?></h2><?php endif; ?>
 	<?php if (!empty($args['price'])) : ?><div class="price"><?php echo esc_html($args['price']); ?></div><?php endif; ?>
 	<h2 class="card-title"><?php echo esc_html($title); ?></h2>
 	<p><?php echo esc_html($text); ?></p>

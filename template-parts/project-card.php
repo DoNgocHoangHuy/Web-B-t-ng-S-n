@@ -3,6 +3,10 @@
 $pid = get_the_ID();
 $status = nvr_meta('project_status_text', $pid, 'Đang mở bán');
 $soon = mb_stripos($status, 'Sắp') !== false;
+$loc = trim((string) nvr_meta('project_location', $pid, ''));
+$area = trim((string) nvr_meta('project_area', $pid, 'TP. Hồ Chí Minh'));
+$address = $loc !== '' ? ($area !== '' && mb_stripos($loc, $area) === false ? $loc . ', ' . $area : $loc) : $area;
+$specs = array_filter([nvr_meta('project_developer', $pid, ''), nvr_meta('project_scale', $pid, '')]);
 ?>
 <article class="project-card">
 	<a class="project-image" href="<?php the_permalink(); ?>" aria-label="Xem dự án <?php the_title_attribute(); ?>" tabindex="-1">
@@ -13,7 +17,7 @@ $soon = mb_stripos($status, 'Sắp') !== false;
 	<div class="project-content">
 		<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 		<div class="price"><?php echo esc_html(nvr_meta('project_price', $pid, 'Đang cập nhật')); ?></div>
-		<p class="location"><?php echo nvr_icon('pin', 15); ?><span><?php echo esc_html(nvr_meta('project_area', $pid, 'TP. Hồ Chí Minh')); ?></span></p>
-		<a class="text-link" href="<?php the_permalink(); ?>">Xem chi tiết <?php echo nvr_icon('arrow', 16); ?></a>
+		<p class="location"><?php echo nvr_icon('pin', 15); ?><span><?php echo esc_html($address); ?></span></p>
+		<?php if ($specs) : ?><p class="property-meta"><?php foreach ($specs as $sp) echo '<span>' . esc_html($sp) . '</span>'; ?></p><?php endif; ?>
 	</div>
 </article>

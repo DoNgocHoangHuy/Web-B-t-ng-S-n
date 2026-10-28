@@ -56,6 +56,17 @@
 			(name && !name.value.trim() ? name : phone).focus();
 			return;
 		}
+		var bd = form.querySelector('[name=booking_date]');
+		if (bd && !bd.value) {
+			e.preventDefault();
+			var n2 = document.createElement('div');
+			n2.className = 'notice notice-error notice-client';
+			n2.setAttribute('role', 'alert');
+			n2.textContent = 'Vui lòng chọn ngày hẹn.';
+			form.parentNode.insertBefore(n2, form);
+			bd.focus();
+			return;
+		}
 		track(form.getAttribute('data-track-submit'));
 	});
 
@@ -313,6 +324,123 @@
 			else if (navigator.clipboard) { navigator.clipboard.writeText(location.href).then(function () { btn.textContent = '✓ Đã sao chép link'; }); }
 		});
 	});
+
+
+	/* ------------------------------------------------------------------
+	 * Homepage category tabs (accessible: click + arrow keys)
+	 * ---------------------------------------------------------------- */
+	$$('[data-tabs]').forEach(function (block) {
+		var tabs = $$('[data-tab]', block);
+		var panels = $$('.cat-panel', block);
+		function select(i, focus) {
+			tabs.forEach(function (t, k) {
+				var on = k === i;
+				t.classList.toggle('is-active', on);
+				t.setAttribute('aria-selected', String(on));
+				t.tabIndex = on ? 0 : -1;
+				if (panels[k]) { if (on) panels[k].removeAttribute('hidden'); else panels[k].setAttribute('hidden', ''); }
+			});
+			if (focus) tabs[i].focus();
+			tabs[i].scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
+		}
+		tabs.forEach(function (t, i) {
+			t.addEventListener('click', function () { select(i); });
+			t.addEventListener('keydown', function (e) {
+				var n = null;
+				if (e.key === 'ArrowRight') n = (i + 1) % tabs.length;
+				else if (e.key === 'ArrowLeft') n = (i - 1 + tabs.length) % tabs.length;
+				else if (e.key === 'Home') n = 0;
+				else if (e.key === 'End') n = tabs.length - 1;
+				if (n !== null) { e.preventDefault(); select(n, true); }
+			});
+		});
+	});
+
+	/* "Về NhàViệt": hover/focus một mục -> đổi ảnh. Trên cảm ứng: chạm lần 1 để xem, chạm lần 2 để mở link. */
+	(function () {
+		var root = $('[data-about]');
+		if (!root) return;
+		var items = $$('[data-about-item]', root), imgs = $$('[data-about-img]', root);
+		function show(n) {
+			items.forEach(function (el, k) { el.classList.toggle('active', k === n); });
+			imgs.forEach(function (el, k) { el.classList.toggle('show', k === n); });
+		}
+		items.forEach(function (el, k) {
+			el.addEventListener('mouseenter', function () { show(k); });
+			el.addEventListener('focus', function () { show(k); });
+			el.addEventListener('click', function (e) {
+				var touch = window.matchMedia && window.matchMedia('(hover: none)').matches;
+				if (touch && !el.classList.contains('active')) { e.preventDefault(); show(k); }
+			});
+		});
+	})();
+
+
+	/* ------------------------------------------------------------------
+	 * Booking pop-up ("Đặt lịch")
+	 * ---------------------------------------------------------------- */
+	(function () {
+		var modal = $('#nvr-booking');
+		if (!modal) return;
+		var lastFocus = null;
+		function open() {
+			lastFocus = document.activeElement;
+			modal.hidden = false;
+			document.body.classList.add('nvr-modal-open');
+			var first = $('input[name=contact_name]', modal);
+			if (first) setTimeout(function () { first.focus(); }, 50);
+		}
+		function close() {
+			modal.hidden = true;
+			document.body.classList.remove('nvr-modal-open');
+			if (lastFocus && lastFocus.focus) lastFocus.focus();
+		}
+		document.addEventListener('click', function (e) {
+			if (e.target.closest('[data-open-booking]')) { e.preventDefault(); open(); }
+			else if (e.target.closest('[data-close-booking]')) close();
+		});
+		document.addEventListener('keydown', function (e) {
+			if (modal.hidden) return;
+			if (e.key === 'Escape') { close(); return; }
+			if (e.key !== 'Tab') return;
+			var f = $$('a[href],button:not([disabled]),input:not([tabindex="-1"]):not([type=hidden]),select,textarea', modal).filter(function (n) { return n.offsetParent !== null; });
+			if (!f.length) return;
+			var a = f[0], z = f[f.length - 1];
+			if (e.shiftKey && document.activeElement === a) { e.preventDefault(); z.focus(); }
+			else if (!e.shiftKey && document.activeElement === z) { e.preventDefault(); a.focus(); }
+		});
+		if ($('.notice-error', modal) || location.hash === '#dat-lich') open();
+		window.nvrOpenBooking = open;
+	})();
+
+	/* ------------------------------------------------------------------
+	 * Trang Liên hệ: parallax nền + thẻ "magnetic"
+	 * ---------------------------------------------------------------- */
+	(function () {
+		var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		if (reduce) return;
+		var bg = $('[data-parallax]');
+		if (bg) {
+			var ticking = false;
+			var update = function () {
+				var host = bg.parentNode.getBoundingClientRect();
+				bg.style.transform = 'translate3d(0,' + Math.round(-host.top * 0.18) + 'px,0)';
+				ticking = false;
+			};
+			window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+			update();
+		}
+		if (window.matchMedia && !window.matchMedia('(hover: hover)').matches) return;
+		$$('.lh-card').forEach(function (card) {
+			card.addEventListener('mousemove', function (e) {
+				var r = card.getBoundingClientRect();
+				var dx = (e.clientX - (r.left + r.width / 2)) * 0.14;
+				var dy = (e.clientY - (r.top + r.height / 2)) * 0.14;
+				card.style.transform = 'translate(' + dx.toFixed(1) + 'px,' + (dy - 3).toFixed(1) + 'px)';
+			});
+			card.addEventListener('mouseleave', function () { card.style.transform = ''; });
+		});
+	})();
 
 	/* ------------------------------------------------------------------
 	 * Image fallback: never show a broken image icon.

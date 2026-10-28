@@ -18,7 +18,9 @@ function nvr_theme_setup() {
 add_action('after_setup_theme', 'nvr_theme_setup');
 
 function nvr_enqueue_assets() {
-	wp_enqueue_style('nvr-style', get_stylesheet_uri(), [], NVR_VERSION);
+	$serif_fonts = is_front_page() || is_page('lien-he');
+	if ($serif_fonts) wp_enqueue_style('nvr-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;600;700;800&display=swap', [], null);
+	wp_enqueue_style('nvr-style', get_stylesheet_uri(), $serif_fonts ? ['nvr-fonts'] : [], NVR_VERSION);
 	wp_enqueue_script('nvr-main', NVR_URI . '/assets/js/main.js', [], NVR_VERSION, ['in_footer' => true, 'strategy' => 'defer']);
 	wp_localize_script('nvr-main', 'NVR', [
 		'ajax'        => admin_url('admin-ajax.php'),

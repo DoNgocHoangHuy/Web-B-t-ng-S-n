@@ -250,9 +250,11 @@ while (have_posts()) : the_post(); ?>
 
 <section class="section">
 	<div class="container"><div class="cta-band">
-		<div>
+		<div class="cta-copy">
+			<div class="eyebrow">Nhận tư vấn</div>
 			<h2>Bạn đang tìm một tổ ấm phù hợp?</h2>
 			<p>Để lại thông tin, chuyên viên sẽ liên hệ tư vấn theo đúng nhu cầu và ngân sách của bạn.</p>
+			<ul class="cta-points"><li><?php echo nvr_icon('check', 16); ?> Tư vấn miễn phí, không ràng buộc</li><li><?php echo nvr_icon('check', 16); ?> Phản hồi trong thời gian sớm nhất</li><li><?php echo nvr_icon('check', 16); ?> Gợi ý theo đúng nhu cầu và ngân sách</li></ul>
 			<p class="cta-contact"><?php echo nvr_icon('phone', 16); ?> <a href="<?php echo esc_attr(nvr_hotline_tel()); ?>" data-track="click_hotline"><?php echo esc_html(nvr_hotline()); ?></a> · <a href="<?php echo esc_url(nvr_zalo_url()); ?>" target="_blank" rel="noopener" data-track="click_zalo">Chat Zalo</a></p>
 		</div>
 		<?php echo nvr_contact_form_html(['source' => 'Trang Về chúng tôi', 'compact' => true]); ?>
