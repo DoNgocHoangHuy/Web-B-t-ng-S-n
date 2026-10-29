@@ -4,7 +4,7 @@ while (have_posts()) : the_post();
 	$id = get_the_ID();
 	$status = nvr_meta('project_status_text', $id, 'Đang mở bán');
 	$soon = mb_stripos($status, 'Sắp') !== false;
-	$loc = nvr_meta('project_location', $id, nvr_meta('project_area', $id, 'TP. Hồ Chí Minh'));
+	$loc = nvr_merge_address(nvr_meta('project_location', $id, ''), nvr_meta('project_area', $id, 'TP. Hồ Chí Minh'));
 	$dev = nvr_meta('project_developer', $id);
 	$dev_id = $dev ? nvr_find_post_by_title($dev, 'developer') : 0;
 	$embed = nvr_map_embed_url($loc, nvr_meta('latitude', $id), nvr_meta('longitude', $id), nvr_meta('project_map_url', $id));

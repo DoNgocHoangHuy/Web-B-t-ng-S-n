@@ -164,11 +164,17 @@ while (have_posts()) : the_post(); ?>
 <section class="section<?php echo $milestones ? ' soft' : ''; ?>">
 	<div class="container">
 		<div class="section-head"><div><h2>Quy trình làm việc</h2><p>Năm bước rõ ràng để bạn luôn biết mình đang ở đâu.</p></div></div>
-		<ol class="about-steps">
-			<?php foreach ($steps as $i => $st) : ?>
-				<li><span class="about-step-no"><?php echo (int) ($i + 1); ?></span><div><h3><?php echo esc_html($st[0]); ?></h3><p><?php echo esc_html($st[1]); ?></p></div></li>
-			<?php endforeach; ?>
-		</ol>
+		<div class="about-process">
+			<ol class="about-steps">
+				<?php foreach ($steps as $i => $st) : ?>
+					<li><span class="about-step-no"><?php echo (int) ($i + 1); ?></span><div><h3><?php echo esc_html($st[0]); ?></h3><p><?php echo esc_html($st[1]); ?></p></div></li>
+				<?php endforeach; ?>
+			</ol>
+			<figure class="about-process-img">
+				<?php echo nvr_img('https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1000&q=80', 'Chuyên viên tư vấn đồng hành cùng khách hàng', 900, 1000, ['sizes' => '(max-width: 900px) 100vw, 520px']); ?>
+				<figcaption><?php echo nvr_icon('check', 16); ?> Đồng hành trọn vẹn từ lần gặp đầu tiên</figcaption>
+			</figure>
+		</div>
 	</div>
 </section>
 
@@ -224,25 +230,28 @@ while (have_posts()) : the_post(); ?>
 </section>
 
 <section class="section">
-	<div class="container about-split about-info">
-		<div>
-			<div class="eyebrow dark">Thông tin doanh nghiệp</div>
-			<h2><?php echo esc_html($company); ?></h2>
-			<p>Hãy ghé văn phòng hoặc liên hệ qua các kênh dưới đây. Chúng tôi luôn sẵn sàng lắng nghe nhu cầu của bạn.</p>
-			<ul class="about-contact">
-				<?php if ($address) : ?><li><?php echo nvr_icon('pin', 18); ?><span><strong>Địa chỉ</strong><?php echo esc_html($address); ?></span></li><?php endif; ?>
-				<?php if ($hours) : ?><li><?php echo nvr_icon('clock', 18); ?><span><strong>Giờ làm việc</strong><?php echo esc_html($hours); ?></span></li><?php endif; ?>
-				<li><?php echo nvr_icon('phone', 18); ?><span><strong>Hotline</strong><a href="<?php echo esc_attr(nvr_hotline_tel()); ?>" data-track="click_hotline"><?php echo esc_html(nvr_hotline()); ?></a></span></li>
-				<?php if ($email) : ?><li><?php echo nvr_icon('mail', 18); ?><span><strong>Email</strong><a href="mailto:<?php echo esc_attr($email); ?>"><?php echo esc_html($email); ?></a></span></li><?php endif; ?>
-				<li><?php echo nvr_icon('zalo', 18); ?><span><strong>Zalo</strong><a href="<?php echo esc_url(nvr_zalo_url()); ?>" target="_blank" rel="noopener" data-track="click_zalo">Nhắn tin tư vấn</a></span></li>
-			</ul>
-		</div>
-		<div>
-			<div class="eyebrow dark">Câu hỏi thường gặp</div>
-			<div class="about-faq">
-				<?php foreach ($faqs as $i => $f) : ?>
-					<details<?php echo $i === 0 ? ' open' : ''; ?>><summary><?php echo esc_html($f[0]); ?></summary><p><?php echo esc_html($f[1]); ?></p></details>
-				<?php endforeach; ?>
+	<div class="container">
+		<div class="section-head about-center"><div><h2>Liên hệ &amp; giải đáp thắc mắc</h2><p>Mọi kênh hỗ trợ và câu trả lời nhanh cho những điều bạn hay hỏi.</p></div></div>
+		<div class="about-frame">
+			<div class="about-frame-info">
+				<div class="eyebrow">Thông tin doanh nghiệp</div>
+				<h3><?php echo esc_html($company); ?></h3>
+				<p>Hãy ghé văn phòng hoặc liên hệ qua các kênh dưới đây. Chúng tôi luôn sẵn sàng lắng nghe nhu cầu của bạn.</p>
+				<ul class="about-contact">
+					<?php if ($address) : ?><li><span class="ac-ico"><?php echo nvr_icon('pin', 18); ?></span><span><strong>Địa chỉ</strong><?php echo esc_html($address); ?></span></li><?php endif; ?>
+					<?php if ($hours) : ?><li><span class="ac-ico"><?php echo nvr_icon('clock', 18); ?></span><span><strong>Giờ làm việc</strong><?php echo esc_html($hours); ?></span></li><?php endif; ?>
+					<li><span class="ac-ico"><?php echo nvr_icon('phone', 18); ?></span><span><strong>Hotline</strong><a href="<?php echo esc_attr(nvr_hotline_tel()); ?>" data-track="click_hotline"><?php echo esc_html(nvr_hotline()); ?></a></span></li>
+					<?php if ($email) : ?><li><span class="ac-ico"><?php echo nvr_icon('mail', 18); ?></span><span><strong>Email</strong><a href="mailto:<?php echo esc_attr($email); ?>"><?php echo esc_html($email); ?></a></span></li><?php endif; ?>
+					<li><span class="ac-ico"><?php echo nvr_icon('zalo', 18); ?></span><span><strong>Zalo</strong><a href="<?php echo esc_url(nvr_zalo_url()); ?>" target="_blank" rel="noopener" data-track="click_zalo">Nhắn tin tư vấn</a></span></li>
+				</ul>
+			</div>
+			<div class="about-frame-faq">
+				<div class="eyebrow dark">Câu hỏi thường gặp</div>
+				<div class="about-faq">
+					<?php foreach ($faqs as $i => $f) : ?>
+						<details<?php echo $i === 0 ? ' open' : ''; ?>><summary><?php echo esc_html($f[0]); ?></summary><p><?php echo esc_html($f[1]); ?></p></details>
+					<?php endforeach; ?>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -257,7 +266,7 @@ while (have_posts()) : the_post(); ?>
 			<ul class="cta-points"><li><?php echo nvr_icon('check', 16); ?> Tư vấn miễn phí, không ràng buộc</li><li><?php echo nvr_icon('check', 16); ?> Phản hồi trong thời gian sớm nhất</li><li><?php echo nvr_icon('check', 16); ?> Gợi ý theo đúng nhu cầu và ngân sách</li></ul>
 			<p class="cta-contact"><?php echo nvr_icon('phone', 16); ?> <a href="<?php echo esc_attr(nvr_hotline_tel()); ?>" data-track="click_hotline"><?php echo esc_html(nvr_hotline()); ?></a> · <a href="<?php echo esc_url(nvr_zalo_url()); ?>" target="_blank" rel="noopener" data-track="click_zalo">Chat Zalo</a></p>
 		</div>
-		<?php echo nvr_contact_form_html(['source' => 'Trang Về chúng tôi', 'compact' => true]); ?>
+		<?php echo nvr_contact_form_html(['source' => 'Trang Về chúng tôi', 'compact' => true, 'extended' => true]); ?>
 	</div></div>
 </section>
 

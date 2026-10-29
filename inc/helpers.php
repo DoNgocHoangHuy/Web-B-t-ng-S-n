@@ -179,6 +179,29 @@ function nvr_posts_page_url() {
 	return $id ? get_permalink($id) : nvr_page_url('tin-tuc');
 }
 
+/**
+ * Join address fragments without repeating a place name (e.g. "TP. Thủ Đức, TP. Thủ Đức, TP. Hồ Chí Minh").
+ * Accepts any number of strings; each is split on commas, compared ignoring case and the
+ * prefixes TP./Thành phố/Quận/Huyện/Phường/Xã/Thị xã/Tỉnh, and the first occurrence wins.
+ */
+function nvr_merge_address(...$chunks) {
+	$seen = [];
+	$out = [];
+	foreach ($chunks as $chunk) {
+		foreach (explode(',', (string) $chunk) as $part) {
+			$part = trim(preg_replace('/\s+/u', ' ', $part));
+			if ($part === '') continue;
+			$key = mb_strtolower($part, 'UTF-8');
+			$key = preg_replace('/^(thành phố|thanh pho|tp\.?|quận|q\.|huyện|thị xã|tx\.?|phường|p\.|xã|tỉnh)\s*/u', '', $key);
+			$key = trim($key, " .");
+			if ($key === '' || isset($seen[$key])) continue;
+			$seen[$key] = true;
+			$out[] = $part;
+		}
+	}
+	return implode(', ', $out);
+}
+
 function nvr_archive_url($post_type = 'property', $args = []) {
 	$url = get_post_type_archive_link($post_type);
 	if (!$url) $url = home_url('/');

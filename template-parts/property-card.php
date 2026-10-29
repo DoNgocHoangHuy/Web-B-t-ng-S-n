@@ -15,7 +15,7 @@ $specs = nvr_specs($pid);
 	</div>
 	<div class="property-content">
 		<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-		<p class="location"><?php echo nvr_icon('pin', 15); ?><span><?php echo esc_html(nvr_meta('address', $pid, trim(strip_tags(get_the_term_list($pid, 'property_location', '', ', ')) ?: 'TP. Hồ Chí Minh'))); ?></span></p>
+		<p class="location"><?php echo nvr_icon('pin', 15); ?><span><?php echo esc_html(nvr_merge_address(nvr_meta('address', $pid, trim(strip_tags(get_the_term_list($pid, 'property_location', '', ', ')) ?: 'TP. Hồ Chí Minh')))); ?></span></p>
 		<?php if ($specs) : ?>
 			<p class="property-meta"><?php foreach ($specs as $s) echo '<span>' . esc_html($s) . '</span>'; ?></p>
 		<?php endif; ?>

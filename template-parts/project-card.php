@@ -5,7 +5,7 @@ $status = nvr_meta('project_status_text', $pid, 'Đang mở bán');
 $soon = mb_stripos($status, 'Sắp') !== false;
 $loc = trim((string) nvr_meta('project_location', $pid, ''));
 $area = trim((string) nvr_meta('project_area', $pid, 'TP. Hồ Chí Minh'));
-$address = $loc !== '' ? ($area !== '' && mb_stripos($loc, $area) === false ? $loc . ', ' . $area : $loc) : $area;
+$address = nvr_merge_address($loc, $area);
 $specs = array_filter([nvr_meta('project_developer', $pid, ''), nvr_meta('project_scale', $pid, '')]);
 ?>
 <article class="project-card">

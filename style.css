@@ -837,3 +837,40 @@ body.nvr-modal-open{overflow:hidden}
 }
 @media (hover:none){.lh-map iframe{filter:grayscale(.2)}}
 @media (prefers-reduced-motion:reduce){.lh-bg{transform:none!important}.lh-card,.lh-submit,.lh-field::after{transition:none}.lh-submit:hover::after{transition:none}}
+
+
+/* =====================================================================
+   v5.7 - Về chúng tôi: quy trình + ảnh, liên hệ & FAQ trong 1 khung
+   ===================================================================== */
+.about-process{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:56px;align-items:stretch}
+.about-process .about-steps{max-width:none;align-content:space-between}
+.about-process-img{position:relative;margin:0;border-radius:24px;overflow:hidden;min-height:420px;background:var(--green-soft);box-shadow:0 22px 50px rgba(24,37,31,.14)}
+.about-process-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.about-process-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(8,40,30,.55))}
+.about-process-img figcaption{position:absolute;left:18px;right:18px;bottom:18px;z-index:1;display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:14px;background:rgba(255,255,255,.94);color:var(--ink);font-weight:700;font-size:15px;backdrop-filter:blur(6px)}
+.about-process-img figcaption .nvr-icon{flex:none;width:26px;height:26px;padding:5px;border-radius:50%;background:var(--green);color:#fff;box-sizing:border-box}
+.about-center{justify-content:center;text-align:center}
+.about-frame{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);border-radius:28px;overflow:hidden;background:#fff;border:1px solid #e1e9e4;box-shadow:0 24px 60px rgba(24,37,31,.12)}
+.about-frame-info{position:relative;padding:44px 40px;color:#e6f3ed;background:radial-gradient(circle at 0 0,#1c8a68 0,transparent 55%),linear-gradient(160deg,#0f5a43,#08382a)}
+.about-frame-info .eyebrow{color:#b8e2d1;margin-bottom:10px}
+.about-frame-info h3{margin:0 0 10px;font-size:26px;line-height:1.25;color:#fff}
+.about-frame-info p{margin:0;color:#cfe8dc;line-height:1.75}
+.about-frame-info .about-contact{margin-top:26px;gap:18px}
+.about-frame-info .about-contact li{align-items:center}
+.about-frame-info .ac-ico{flex:none;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.12)}
+.about-frame-info .about-contact .nvr-icon{margin:0;color:#8fe0bd}
+.about-frame-info .about-contact strong{color:#a9cdbd;font-size:12px;margin-bottom:2px}
+.about-frame-info .about-contact li>span:last-child{color:#fff;font-weight:600;line-height:1.45}
+.about-frame-info .about-contact a{color:#fff;text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(255,255,255,.4)}
+.about-frame-faq{padding:44px 40px;background:#fff}
+.about-frame-faq .about-faq{margin-top:14px;gap:0}
+.about-frame-faq .about-faq details{border:0;border-bottom:1px solid var(--line);border-radius:0;background:none;padding:0}
+.about-frame-faq .about-faq details:last-child{border-bottom:0}
+.about-frame-faq .about-faq summary{padding:18px 0;font-size:16px}
+.about-frame-faq .about-faq summary::after{flex:none;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--green-soft);font-size:20px}
+@media (max-width:900px){
+	.about-process{grid-template-columns:1fr;gap:28px}
+	.about-process-img{min-height:300px;aspect-ratio:4/3}
+	.about-frame{grid-template-columns:1fr;border-radius:22px}
+	.about-frame-info,.about-frame-faq{padding:30px 22px}
+}
